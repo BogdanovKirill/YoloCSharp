@@ -46,7 +46,7 @@ extern "C" {
 	YOLOAPI_EXPORT void detect(unsigned char* mat_data, int mat_rows, int mat_cols, float thresh, bool use_mean, bbox_t** elems, int* elems_size) {
 		cv::Mat img_mat = cv::Mat(mat_rows, mat_cols, CV_8UC3, mat_data);
 		std::vector<bbox_t> result_vector = instance->detect(img_mat, thresh, use_mean);
-		result_vector_static.swap(result_vector);
+		result_vector_static.assign(result_vector.begin(), result_vector.end()); 
 		*elems = result_vector_static.data();
 		*elems_size = result_vector_static.size();
 	}
